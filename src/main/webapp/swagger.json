@@ -1,0 +1,214 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "IncomeCalculator APIs exposed from a Java EE\n\t\t\t\t\t\t\t\t\tback-end to\n\t\t\t\t\t\t\t\t\tan Angular front-end",
+    "version" : "1.0.0",
+    "title" : "IncomeCalculator APIs",
+    "contact" : {
+      "name" : "Japhet Sebastian",
+      "url" : "https://japhet.vercel.app",
+      "email" : "japhet.sebastian01@gmail.com"
+    }
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/income-analyzer/api",
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/incomes" : {
+      "get" : {
+        "operationId" : "findIncomes",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "income",
+          "in" : "query",
+          "required" : false,
+          "type" : "number",
+          "format" : "double"
+        }, {
+          "name" : "heslb",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "createIncome",
+        "consumes" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/incomes/{id}" : {
+      "get" : {
+        "operationId" : "getTaxableIncomeById",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "pattern" : "\\d+",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "updateIncome",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "pattern" : "\\d+",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteTaxableIncome",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "pattern" : "\\d+",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "operationId" : "findAllUsers",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "signUpUser",
+        "consumes" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/users/count" : {
+      "get" : {
+        "operationId" : "countUsers",
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/users/login" : {
+      "post" : {
+        "operationId" : "authenticateUser",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "parameters" : [ {
+          "name" : "login",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "password",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/users/user" : {
+      "get" : {
+        "operationId" : "findUsersByKeyword",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/users/{id}" : {
+      "get" : {
+        "operationId" : "findUserById",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "pattern" : "\\d+",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteUser",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "pattern" : "\\d+",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    }
+  }
+}
