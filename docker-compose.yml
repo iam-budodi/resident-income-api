@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:14.1-alpine
+    container_name: db
+    environment:
+      POSTGRES_USER: resident # The PostgreSQL user (useful to connect to the database)
+      #POSTGRES_PASSWORD: ******** # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: residentsincome # The PostgreSQL default database (automatically created at first launch)
+    ports:
+      - 5432:5432
+    networks: 
+      - counter-net
+    secrets:
+      - postgres_password
+  
+  wildfly:
+    container_name: app_server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links: 
+      - database
+    ports:
+      - 8080:8080
+      - 9990:9990
+    networks: 
+      - counter-net
+    secrets:
+      - postgres_password
+
+  command-line:
+    image: maven:3.8-openjdk-11-slim
+    container_name: mvn
+    command: tail -f /dev/null
+    links: 
+      - database
+      - wildfly
+    networks: 
+      - counter-net
+    volumes:
+      - ..:/workspace
+
+secrets:
+  postgres_password:
+    file: ./devsecrets/postgres_password
+
+networks: 
+    counter-net:

@@ -43,3 +43,5 @@ hs_err_pid*
 
 persistence.xml
 test-persistence.xml
+
+devsecrets
